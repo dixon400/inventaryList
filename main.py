@@ -36,7 +36,7 @@ def read_root():
 
 @app.get("/products")
 def all():
-    return Product.all_pks()
+    return [format(pk) for pk in Product.all_pks()]
 
 def format(pk: str):
     product = Product.get(pk)
@@ -51,3 +51,11 @@ def format(pk: str):
 @app.post("/products")
 def create(product: Product):
     return product.save()
+
+@app.get("/product/{pk}")
+def get(pk: str):
+    return Product.get(pk)
+
+@app.delete("/product/{pk}")
+def dekete(pk: str):
+    return Product.delete(pk)
